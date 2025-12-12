@@ -1,0 +1,114 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif; /* Daha modern bir font */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Koyu mor ve siyah tonlarında şık bir gradyan */
+  background: linear-gradient(135deg, #0f0c29, #301934, #24243e);
+  color: #f0f0f0; /* Açık renk yazı */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  width: 550px; /* Biraz daha geniş */
+  padding: 20px;
+}
+
+.upload-box, .result-box {
+  /* Koyu, hafif şeffaf kutu arka planı */
+  background-color: rgba(30, 30, 40, 0.85);
+  padding: 40px;
+  border-radius: 20px; /* Daha yuvarlak köşeler */
+  /* Derinlik hissi veren zarif gölge */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 0 5px rgba(99, 66, 150, 0.3);
+  text-align: center;
+  backdrop-filter: blur(5px); /* Hafif bulanıklık efekti */
+  border: 1px solid #4a3a69; /* Mor bir çerçeve */
+}
+
+.upload-box h2, .result-box h2 {
+  margin-top: 0;
+  color: #e0b0ff; /* Açık mor başlık rengi */
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+input[type="file"] {
+  margin-top: 25px;
+  color: #a0a0a0;
+  cursor: pointer;
+  /* Dosya seçme butonunu özelleştirme */
+  padding: 10px;
+  border: 1px solid #6c5ce7;
+  border-radius: 8px;
+  background-color: #1a1a2e;
+}
+
+/* Dosya seçildiğinde adının görünümü */
+input[type="file"]::-webkit-file-upload-button {
+  visibility: hidden;
+  width: 0;
+}
+
+
+button {
+  margin-top: 30px;
+  padding: 14px 30px;
+  /* Canlı mor buton rengi */
+  background-color: #6c5ce7;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
+  letter-spacing: 0.5px;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+}
+
+button:hover {
+  background-color: #8978f1; /* Morun daha açık tonu */
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(108, 92, 231, 0.6);
+}
+
+.result-text {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #1a1a2e; /* Koyu arka plan */
+  border-radius: 12px;
+  min-height: 80px;
+  max-height: 250px;     /* ✔ Yüksekliği sınırla */
+  overflow-y: auto;       /* ✔ Dikey kaydırma ekle */
+  white-space: pre-wrap;  /* ✔ Metin formatını koru */
+  color: #f0f0f0;
+  font-weight: 500;
+  text-align: left;
+  line-height: 1.6;
+  border-left: 5px solid #a29bfe; /* Vurgulu sol çizgi */
+}
+
+.download-section {
+  margin-top: 20px;
+}
+
+.download-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: transform 0.2s;
+}
+
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
