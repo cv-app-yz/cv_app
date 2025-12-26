@@ -4,18 +4,55 @@ body {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding: 20px 0;
   /* Koyu mor ve siyah tonlarında şık bir gradyan */
   background: linear-gradient(135deg, #0f0c29, #301934, #24243e);
   background-attachment: fixed;
   color: #f0f0f0; /* Açık renk yazı */
 }
 
+.tab-navigation {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.tab-active,
+.tab-inactive {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #6c5ce7;
+  color: white;
+}
+
+.tab-active {
+  background-color: #6c5ce7;
+  box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+}
+
+.tab-inactive {
+  background-color: rgba(108, 92, 231, 0.3);
+  opacity: 0.7;
+}
+
+.tab-inactive:hover {
+  opacity: 1;
+  background-color: rgba(108, 92, 231, 0.5);
+}
+
 .container {
   display: flex;
   flex-direction: column;
   gap: 35px;
-  width: 550px; /* Biraz daha geniş */
+  width: 100%;
+  max-width: 900px; /* Daha geniş, chatbot için */
   padding: 20px;
 }
 

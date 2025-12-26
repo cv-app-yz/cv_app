@@ -14,10 +14,16 @@ class Experience(BaseModel):
     # AI burayı "Ben yaptım" dilinden "Yapıldı/Edildi" diline çevirecek
     description: str = Field(..., description="Yapılan işlerin profesyonel ve maddeler halinde özeti")
 
+class Project(BaseModel):
+    name: str = Field(..., description="Proje adı")
+    date: Optional[str] = Field(None, description="Proje tarihi (Örn: 2020-2024)")
+    description: str = Field(..., description="Proje açıklaması veya yapılanların maddeler halinde özeti")
+
 class ContactInfo(BaseModel):
     email: str = Field(..., description="E-posta adresi")
     phone: Optional[str] = Field(None, description="Telefon numarası")
     linkedin: Optional[str] = Field(None, description="LinkedIn profil linki")
+    github: Optional[str] = Field(None, description="GitHub profil linki")
     location: Optional[str] = Field(None, description="Şehir / Ülke")
 
 class Skills(BaseModel):
@@ -32,6 +38,7 @@ class CVData(BaseModel):
     summary: str = Field(..., description="Kişiyi anlatan kısa, vurucu profesyonel özet")
     education: List[Education] = Field(default=[])
     experience: List[Experience] = Field(default=[])
+    projects: List[Project] = Field(default=[], description="Kişisel veya profesyonel projeler listesi")
     skills: Skills
     
     # AI'ın bize notu (Frontend'de kullanıcıya ipucu vermek için)

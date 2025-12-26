@@ -4,14 +4,11 @@ import "./App.css";
 
 function App() {
   // --- STATE TANIMLARI ---
-  // Eski state'ler korundu
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [pdfUrl, setPdfUrl] = useState(null);
-  
-  // Yeni özellikler için state'ler
   const [city, setCity] = useState(""); // Şehir bilgisi
-  const [aiFeedback, setAiFeedback] = useState(""); // 'result' yerine daha net isimlendirme
+  const [aiFeedback, setAiFeedback] = useState(""); // AI geri bildirimi
   const [jobs, setJobs] = useState([]); // İş ilanları listesi
 
   // --- API İSTEĞİ FONKSİYONU ---
@@ -33,9 +30,8 @@ function App() {
 
       const data = response.data;
 
-      // 1. AI Geri Bildirimi (Veri yapısına göre güncellendi)
-      // Backend'den gelen: { optimized_cv: { ai_feedback: "..." }, ... }
-      const feedbackText = data.optimized_cv?.ai_feedback || "Analiz tamamlandı.";
+      // 1. AI Geri Bildirimi - Kısa ve pozitif mesaj
+      const feedbackText = data.ai_feedback || data.optimized_cv?.ai_feedback || "✅ CV analizi tamamlandı.";
       setAiFeedback(feedbackText);
 
       // 2. İş İlanları
@@ -61,8 +57,7 @@ function App() {
 
   return (
     <div className="container">
-      
-      {/* --- YÜKLEME ALANI (Eski tasarım korundu + Şehir eklendi) --- */}
+      {/* --- YÜKLEME ALANI --- */}
       <div className="upload-box">
         <h2>CV Analiz & İş Bulma Platformu</h2>
         

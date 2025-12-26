@@ -37,21 +37,17 @@ async def analyze_and_match(
         optimized_cv = ai_agent.optimize_cv_with_gemini(raw_text)
         print("✅ Gemini analizi tamamlandı.")
 
-        # --- ESKİ ÖZELLİK: PDF OLUŞTURMA ---
-        # AI Feedback'i ayır (PDF'in içine basılmasın diye)
-        ai_feedback_text = optimized_cv.ai_feedback if hasattr(optimized_cv, 'ai_feedback') else "Analiz tamamlandı."
+        # AI feedback'i sakla (PDF'de gösterilmiyor ama frontend'e döneceğiz)
+        ai_feedback_text = optimized_cv.ai_feedback if optimized_cv.ai_feedback else "CV'niz başarıyla hazırlandı."
         
-        # PDF oluştururken feedback alanını geçici olarak temizle
-        # (Bu işlem objeyi bellekte değiştirdiği için kopyasını almak veya geri yüklemek gerekebilir,
-        # ancak basitlik adına PDF oluşturup geri atayacağız)
-        original_feedback = optimized_cv.ai_feedback
+        # PDF oluştururken feedback alanını geçici olarak temizle (PDF'de gösterilmiyor)
         optimized_cv.ai_feedback = None 
         
         print("⏳ ADIM 3: Optimize edilmiş PDF oluşturuluyor...")
         pdf_bytes = pdf_generation.create_cv_pdf(optimized_cv)
         
-        # Feedback'i geri yükle (Frontend'e JSON olarak döneceğiz çünkü)
-        optimized_cv.ai_feedback = original_feedback
+        # Feedback'i geri yükle
+        optimized_cv.ai_feedback = ai_feedback_text
         
         # PDF'i Base64 formatına çevir (İndirme linki için)
         pdf_base64 = base64.b64encode(pdf_bytes).decode('utf-8')
@@ -81,10 +77,10 @@ async def analyze_and_match(
         # FastAPI JSONResponse bunu otomatik halleder ama model_dump() daha garantidir.
         return JSONResponse(content={
             "status": "success",
-            "ai_feedback": ai_feedback_text,      # Eski özellik
-            "pdf_url": pdf_url,                   # Eski özellik
+            "ai_feedback": ai_feedback_text,  # AI'dan gelen kısa ve pozitif geri bildirim
+            "pdf_url": pdf_url,
             "optimized_cv": optimized_cv.model_dump(), # Frontend'de skill listelemek için gerekli
-            "job_matches": recommended_jobs       # Yeni özellik
+            "job_matches": recommended_jobs
         })
         
     except HTTPException:

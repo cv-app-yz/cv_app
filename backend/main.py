@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.api.cv_router import router
+from app.api.cv_router import router as cv_router
 from app.core.config import settings
 from app.core.middleware import setup_cors
 
@@ -12,8 +12,8 @@ app = FastAPI(
 # CORS middleware'i ekle
 setup_cors(app)
 
-# Router'ı ekliyoruz
-app.include_router(router, prefix="/api/v1", tags=["CV Operations"])
+# Router'ları ekliyoruz
+app.include_router(cv_router, prefix="/api/v1", tags=["CV Operations"])
 
 @app.get("/")
 def root():
